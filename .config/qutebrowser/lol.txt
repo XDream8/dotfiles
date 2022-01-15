@@ -1,0 +1,12 @@
+! 5/8/2020 https://old.reddit.com
+old.reddit.com##.premium-banner
+
+! 09/05/2020 https://www.reddit.com
+www.reddit.com##.premium-banner
+
+! 2020-09-07 https://www.reddit.com
+||i.redd.it/award_images/t5_22cerq/k0qzautvyyk51_LookingBusy.png$image
+
+youtube.com##+js(addEventListener-defuser.js, keydown)
+youtube.com##.ytd-action-companion-ad-renderer
+youtube.com###player-ads

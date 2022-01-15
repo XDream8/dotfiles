@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" ]; then
+	. "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile"
+else
+	. "$HOME/.xprofile"
+fi
+
+# exec i3
+# exec bspwm
+# exec repowm
+# exec startfluxbox
+# /home/xdream8/.config/dwm-bar.sh &
+exec spectrwm
+# exec dwm
+# exec awesome
+# while :; do
+# 	ssh-agent instawm
+# done

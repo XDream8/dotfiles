@@ -1,0 +1,68 @@
+!st.font:Hack Nerd Font:pixelsize=15:antialias=true:autohint=true;
+*.font: FiraCode Nerd Font:size=11
+/* *.font:IBM Plex Mono:size=11 */
+
+Xft.dpi:				96
+Xft.autohint:   0
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xft.lcdfilter:  lcddefault
+
+! Custom Dracula Xresources palette
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #282A36
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15:    #E6E6E6
+
+! ST
+st.alpha: 1
+
+/* URxvt.font: xft:FiraCode Nerd Font:size=11,xft:JoyPixels:size=11,xft:FontAwesome:size=11,xft:Noto Emoji */
+URxvt.font: xft:FiraCode Nerd Font:size=12,xft:Noto Emoji
+/* URxvt*boldFont: xft:FiraCode Nerd Font:pixelsize=12,xft:Noto Emoji */
+URxvt.letterSpace: -1
+URxvt.internalBorder: 5
+URxvt.loginShell: true
+URxvt.scrollBar: false
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.keysym.Shift-Up:	command:\033]720;1\007
+URxvt.keysym.Shift-Down:command:\033]721;1\007
+
+
+!URxvt.perl-ext-common: default,matcher,resize-font,vtwheel
+URxvt.perl-ext:
+URxvt.perl-ext-common:
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.depth: 32
+URxvt*termName:  rxvt-256color
+/* URxvt.background: rgba:0300URxvt.perl-ext-common:  ...,clipboard,.../0300/0300/f000 */
+
+! Xterm
+XTerm.vt100.faceName: xft:IBM Plex Mono:size=11
+xterm*BorderWidth: 5
+XTerm.termName: xterm-256color
+xterm*VT100.Translations: #override \
+	Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+	Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
+
+Sxiv.font: IBM Plex Mono:size=11
+Sxiv.background: #030303
+Sxiv.foreground: #ffffff

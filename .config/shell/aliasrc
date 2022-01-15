@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+# [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	sed="sed --posix" \
+	mkd="mkdir -pv" \
+	yt="youtube-dl --add-metadata -i" \
+	yta="yt -x -f bestaudio/best" \
+	ffmpeg="ffmpeg -hide_banner"
+
+# Colorize commands when possible.
+alias \
+	ls="lsd -h --group-dirs=first --color=auto" \
+	l='ls -l' \
+	la='ls -a' \
+	lla='ls -la' \
+	lt='ls --tree' \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi" \
+	ip='ip -color=auto'
+
+# These common commands are just too long! Abbreviate them.
+alias \
+	ka="killall" \
+	g="git" \
+	f="$FILE" \
+	e="$EDITOR" \
+	v="$EDITOR" \
+	xi="sudo xbps-install" \
+	xr="sudo xbps-remove -R" \
+	xq="xbps-query" \
+	blueup="doas rfkill unblock bluetooth && doas sv up bluetoothd bluez-alsa" \
+	bluedown="doas rfkill block bluetooth && doas sv down bluetoothd bluez-alsa" \
+	dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+alias \
+	tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
