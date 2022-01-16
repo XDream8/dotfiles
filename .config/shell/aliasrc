@@ -33,8 +33,9 @@ alias \
 	f="$FILE" \
 	e="$EDITOR" \
 	v="$EDITOR" \
-	xi="sudo xbps-install" \
-	xr="sudo xbps-remove -R" \
+	xi="doas xbps-install" \
+	repoxi="doas xbps-install -f --repository=$HOME/files/void-packages/hostdir/binpkgs" \
+	xr="doas xbps-remove -R" \
 	xq="xbps-query" \
 	blueup="doas rfkill unblock bluetooth && doas sv up bluetoothd bluez-alsa" \
 	bluedown="doas rfkill block bluetooth && doas sv down bluetoothd bluez-alsa" \
