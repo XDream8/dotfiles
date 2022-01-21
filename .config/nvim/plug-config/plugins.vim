@@ -13,13 +13,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 " Customizations
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'preservim/vim-colors-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
 Plug 'dhruvasagar/vim-table-mode'
-" Code Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"
-Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-surround'
 call plug#end()

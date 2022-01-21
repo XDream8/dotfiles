@@ -1,8 +1,8 @@
 let mapleader =","
 
 " Install vim-plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
@@ -21,6 +21,6 @@ source ~/.config/nvim/keys/splits.vim
 source ~/.config/nvim/keys/shell.vim
 
 " Plugin configs
-source ~/.config/nvim/plug-config/coc.vim
+" source ~/.config/nvim/plug-config/coc.vim
 source ~/.config/nvim/plug-config/netrw.vim
 source ~/.config/nvim/plug-config/vimwiki.vim
