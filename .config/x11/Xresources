@@ -1,5 +1,5 @@
-!st.font:Hack Nerd Font:pixelsize=15:antialias=true:autohint=true;
-*.font: FiraCode Nerd Font:size=11
+/* st.font:Hack Nerd Font:pixelsize=15:antialias=true:autohint=true; */
+*.font: FiraCode Nerd Font Mono:size=11
 /* *.font:IBM Plex Mono:size=11 */
 
 Xft.dpi:				96
@@ -10,7 +10,7 @@ Xft.hinting:    true
 Xft.hintstyle:  hintslight
 Xft.lcdfilter:  lcddefault
 
-! Custom Dracula Xresources palette
+/* Custom Dracula Xresources palette */
 *.foreground: #F8F8F2
 *.background: #282A36
 *.color0:     #282A36
@@ -30,7 +30,7 @@ Xft.lcdfilter:  lcddefault
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
 
-! ST
+/* ST */
 st.alpha: 1
 
 /* URxvt.font: xft:FiraCode Nerd Font:size=11,xft:JoyPixels:size=11,xft:FontAwesome:size=11,xft:Noto Emoji */
@@ -46,7 +46,7 @@ URxvt.keysym.Shift-Up:	command:\033]720;1\007
 URxvt.keysym.Shift-Down:command:\033]721;1\007
 
 
-!URxvt.perl-ext-common: default,matcher,resize-font,vtwheel
+/* URxvt.perl-ext-common: default,matcher,resize-font,vtwheel */
 URxvt.perl-ext:
 URxvt.perl-ext-common:
 URxvt.url-launcher: /usr/bin/xdg-open
@@ -55,7 +55,7 @@ URxvt.depth: 32
 URxvt*termName:  rxvt-256color
 /* URxvt.background: rgba:0300URxvt.perl-ext-common:  ...,clipboard,.../0300/0300/f000 */
 
-! Xterm
+/* Xterm */
 XTerm.vt100.faceName: xft:IBM Plex Mono:size=11
 xterm*BorderWidth: 5
 XTerm.termName: xterm-256color
@@ -66,3 +66,18 @@ xterm*VT100.Translations: #override \
 Sxiv.font: IBM Plex Mono:size=11
 Sxiv.background: #030303
 Sxiv.foreground: #ffffff
+
+/* Herbe Notification */
+herbe.background_color: #282A36
+herbe.border_color: #ececec
+herbe.font_color: #ececec
+herbe.font_pattern: xft:IBM Plex Mono:size=11
+herbe.line_spacing: 5
+herbe.padding: 15
+herbe.width: 450
+herbe.border_size: 2
+herbe.pos_x: 20
+herbe.pos_y: 35
+/* 0 = TOP_LEFT, 1 = TOP_RIGHT, 2 = BOTTOM_LEFT, 3 = BOTTOM_RIGHT */
+herbe.corner: 1
+herbe.duration: 5
