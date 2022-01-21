@@ -16,4 +16,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
 Plug 'dhruvasagar/vim-table-mode'
+" Completion
+Plug 'ervandew/supertab'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
