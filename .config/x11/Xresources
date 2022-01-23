@@ -1,5 +1,5 @@
 /* st.font:Hack Nerd Font:pixelsize=15:antialias=true:autohint=true; */
-*.font: FiraCode Nerd Font Mono:size=11
+*.font: FiraCode Nerd Font:size=11:antialias=true:autohint=true
 /* *.font:IBM Plex Mono:size=11 */
 
 Xft.dpi:				96
@@ -69,9 +69,9 @@ Sxiv.foreground: #ffffff
 
 /* Herbe Notification */
 herbe.background_color: #282A36
-herbe.border_color: #ececec
-herbe.font_color: #ececec
-herbe.font_pattern: xft:IBM Plex Mono:size=11
+herbe.border_color: #8be9fd
+herbe.font_color: #f8f8f2
+herbe.font_pattern: Blex Mono Nerd Font:size=11
 herbe.line_spacing: 5
 herbe.padding: 15
 herbe.width: 450
