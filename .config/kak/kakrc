@@ -1,0 +1,66 @@
+
+# ██╗  ██╗ █████╗ ██╗  ██╗ ██████╗ ██╗   ██╗███╗   ██╗███████╗
+# ██║ ██╔╝██╔══██╗██║ ██╔╝██╔═══██╗██║   ██║████╗  ██║██╔════╝
+# █████╔╝ ███████║█████╔╝ ██║   ██║██║   ██║██╔██╗ ██║█████╗  
+# ██╔═██╗ ██╔══██║██╔═██╗ ██║   ██║██║   ██║██║╚██╗██║██╔══╝  
+# ██║  ██╗██║  ██║██║  ██╗╚██████╔╝╚██████╔╝██║ ╚████║███████╗
+# ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+
+colorscheme dracula
+add-highlighter global/ number-lines -hlcursor
+add-highlighter global/ show-whitespaces
+set-option global ui_options ncurses_assistant=dilbert
+
+hook global RegisterModified '"' %{ nop %sh{
+  printf %s "$kak_main_reg_dquote" | xclip -in -selection clipboard >&- 2>&-
+}}
+
+set-option global indentwidth 4
+map global normal '<c-d>' ': select-or-add-cursor<ret>' -docstring "add cursor on current word, and jump to the next match" 
+set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}}'
+
+map global normal '<c-g>' ':comment-line<ret>' -docstring "comment line"
+map global user P '!xclip -selection clipboard -out<ret>'
+map global user p '<a-!>xclip -selection clipboard -out<ret>'
+
+# load plugins and shortucts
+source ~/.config/kak/plugins/duplicate.kak
+source ~/.config/kak/plugins/emmet.kak
+source ~/.config/kak/plugins/goto-line.kak
+source ~/.config/kak/plugins/inc-dec.kak
+source ~/.config/kak/plugins/map-sequence.kak
+source ~/.config/kak/plugins/next-occurrence.kak
+source ~/.config/kak/plugins/eat-my-shortcuts.kak
+source ~/.config/kak/plugins/palette.kak
+source ~/.config/kak/plugins/kakoune-snippets/snippets.kak
+source ~/.config/kak/plugins/kakoune-snippets/snippets-directory.kak
+source ~/.config/kak/plugins/vertical-selection.kak
+
+map-sequence global jj %{exec <esc>}
+map-sequence global kk %{exec <esc><esc><esc>}
+
+map global user v ':vertical-selection-down<ret>'
+map global user <a-v> ':vertical-selection-up<ret>'
+map global user V ':vertical vertical-selection-up-and-down<ret>'
+
+snippets-expand-trigger %{
+    reg / "%opt{snippets_triggers_regex}"
+    # select to the beginning of the line, and then subselect for one of the triggers
+    exec 'hGhs<ret>'
+}
+
+# kak-lsp
+# eval %sh{kak-lsp --kakoune -s $kak_session}
+# hook global WinSetOption filetype=(rust|python|c) %{
+#     lsp-enable-window
+# }
+# set-option global lsp_server_configuration pyls.configurationSources=["flake8"]
+
+# hook global ModeChange insert:.* %{
+#     set-face global PrimaryCursor      rgb:ffffff,rgb:000000+F
+# }
+
+# hook global ModeChange .*:insert %{
+#     set-face global PrimaryCursor      rgb:ffffff,rgb:008800+F
+# }
+
