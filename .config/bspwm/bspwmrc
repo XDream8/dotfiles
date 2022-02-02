@@ -3,12 +3,6 @@
 bspc rule -r "*"
 
 pgrep -x sxhkd > /dev/null || sxhkd &
-# pgrep -x polybar > /dev/null || launchpolybar
-
-# pgrep -x succade > /dev/null || succade &
-
-# pkill -x polybar &
-# launchpolybar &
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9
 
@@ -30,6 +24,7 @@ bspc config presel_feedback_color "#6272a4"
 # Rules
 bspc rule -a Gimp desktop='^4' state=floating follow=on
 bspc rule -a Chromium desktop='^6'
+bspc rule -a Chromium-browser desktop='^6'
 bspc rule -a Firefox desktop='^6'
 bspc rule -a mplayer2 state=floating
 bspc rule -a mpv desktop='^5' state=fullscreen

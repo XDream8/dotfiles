@@ -1,28 +1,17 @@
 # terminal emulator
-## Category:  Main Keybinds;
-# Description: open a terminal;
 super + Return
 	st
 
-# file manager
-## Category:  Main Keybinds;
-# Description: open pcmanfm;
 super + shift + Return
-	pcmanfm
+	st -e tmux
 
 # program launcher
-## Category:  Main Keybinds;
-# Description: open launcher dmenu;
 super + p
 	dmenu_run
 
 ## Internet
 super + w
-	firefox-esr
-
-# nmtui
-super + shift + w
-	st -t nmTUI -e sudo nmtui
+	luakit
 
 #
 super + alt + a
@@ -30,7 +19,7 @@ super + alt + a
 
 # logout
 super + shift + e
-	instamenue_powermenu
+	repomenue_powermenu
 
 ## Term
 super + r
