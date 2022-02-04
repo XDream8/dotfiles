@@ -1,22 +1,13 @@
-if has('termguicolors')
-  set termguicolors
-endif
-
-colorscheme dracula
 set background=dark
 "Some basics:
 nnoremap c "_c
 set nocompatible
 filetype plugin on
 syntax on
-set title
 set smartcase
 set encoding=utf-8
 set number relativenumber
 set number!
-" edits
-set wrap
-set wrapscan
 " use normal cliphoard not crazy primary bullshit
 set clipboard=unnamedplus
 " Tab Settings
@@ -47,6 +38,7 @@ set noautoindent    " fuck auto-indent
 set formatoptions-=cro " no auto-comment
 " word wrap stuff
 set wrap
+set wrapscan
 set linebreak
 set nolist  " list disables linebreak
 set textwidth=0

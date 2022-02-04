@@ -1,17 +1,15 @@
 let mapleader =","
 
-" Install vim-plug if not found
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
+lua <<EOF
+local user_packadd_path = "faerryn/user.nvim/default/default/default/default"
+local user_install_path = vim.fn.stdpath("data").."/site/pack/user/opt/"..user_packadd_path
+if vim.fn.isdirectory(user_install_path) == 0 then
+  os.execute("git clone --quiet --depth 1 https://github.com/faerryn/user.nvim.git "..vim.fn.shellescape(user_install_path))
+end
+vim.api.nvim_command("packadd "..vim.fn.fnameescape(user_packadd_path))
+EOF
 
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
-
-source ~/.config/nvim/plug-config/plugins.vim
+source ~/.config/nvim/plug-config/plugins.lua
 source ~/.config/nvim/general/basic.vim
 
 " Keybindings
@@ -21,6 +19,6 @@ source ~/.config/nvim/keys/splits.vim
 source ~/.config/nvim/keys/shell.vim
 
 " Plugin configs
-" source ~/.config/nvim/plug-config/coc.vim
+source ~/.config/nvim/plug-config/coc.vim
 source ~/.config/nvim/plug-config/netrw.vim
 source ~/.config/nvim/plug-config/vimwiki.vim

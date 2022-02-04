@@ -12,6 +12,7 @@ Plug 'mhinz/vim-startify'
 Plug 'ap/vim-css-color'
 Plug 'dhruvasagar/vim-table-mode'
 " Completion
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 call plug#end()
