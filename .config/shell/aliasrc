@@ -33,12 +33,8 @@ alias \
 	f="$FILE" \
 	e="$EDITOR" \
 	v="$EDITOR" \
-	xi="doas xbps-install" \
-	repoxi="doas xbps-install -f --repository=$HOME/files/void-packages/hostdir/binpkgs" \
-	xr="doas xbps-remove -R" \
-	xq="xbps-query" \
-	blueup="doas rfkill unblock bluetooth && doas sv up bluetoothd bluez-alsa" \
-	bluedown="doas rfkill block bluetooth && doas sv down bluetoothd bluez-alsa" \
+	blueup="doas rfkill unblock bluetooth && doas rc-service bluetooth start && doas rc-service bluealsa start" \
+	bluedown="doas rfkill block bluetooth && doas rc-service bluetooth stop && doas rc-service bluealsa stop" \
 	dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 alias \

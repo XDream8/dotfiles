@@ -15,7 +15,7 @@ super + w
 
 #
 super + alt + a
-	st -t AlsaMixer -e alsamixer
+        alsamixer-open
 
 # logout
 super + shift + e

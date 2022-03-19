@@ -5,7 +5,7 @@
 local theme = {}
 
 -- Default settings
-theme.font = "12px FiraCode Nerd Font"
+theme.font = "14px FiraCode Nerd Font"
 theme.bg   = "#282A36"
 theme.fg   = "#F8F8F2"
 
@@ -77,7 +77,7 @@ theme.trust_fg          = "#5AF78E"
 theme.notrust_fg        = "#FF6E67"
 
 -- Follow mode hints
-theme.hint_font = "10px FiraCode Nerd Font Mono, courier, sans-serif"
+theme.hint_font = "13px FiraCode Nerd Font Mono, courier, sans-serif"
 theme.hint_fg = theme.fg
 theme.hint_bg = theme.bg
 theme.hint_border = "1px dashed #000"

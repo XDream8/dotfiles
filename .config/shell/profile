@@ -13,9 +13,9 @@ export CCACHE_DIR="/var/cache/ccache"
 unsetopt PROMPT_SP
 
 # Default programs:
-export EDITOR="kak"
+export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="luakit"
+export BROWSER="vimb"
 export READER="mupdf"
 
 # ~/ Clean-up:
