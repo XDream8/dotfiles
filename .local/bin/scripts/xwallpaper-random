@@ -1,0 +1,6 @@
+#!/bin/bash
+
+wallpapers=/home/xdream8/files/Defaults/Resimler/wallpapers/
+random_image=$(ls $wallpapers | grep -E '(png|jpg)$' | sort -R | tail -1)
+xwallpaper --no-randr --zoom $wallpapers/$random_image
+echo -e "$random_image"

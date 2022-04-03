@@ -1,0 +1,25 @@
+#!/bin/sh
+
+terminal=${TERMINAL:-st}
+
+opts=">>h Select your sound card in use
+Bluetooth
+Hardware
+:r Quit"
+
+choice=$(printf '%s\n' "$opts" |  repomenu -ps 1 -l 13 -w -400 -i -h -1 -y -1 -c )
+
+case "$choice" in
+    *Quit)
+        echo "Program terminated." && exit 1
+    ;;
+		*Bluetooth)
+			$terminal -t AlsaMixer -e alsamixer -D bluealsa
+    ;;
+		*Hardware)
+			$terminal -t AlsaMixer -e alsamixer
+		;;
+    *)
+        exit 1
+	;;
+esac

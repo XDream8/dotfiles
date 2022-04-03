@@ -7,11 +7,12 @@ else
 fi
 
 # exec i3
-exec bspwm
+# exec bspwm
+# exec Hypr
 # exec repowm
 # exec startfluxbox
 # /home/xdream8/.config/dwm-bar.sh &
-# exec spectrwm
+exec spectrwm
 # exec dwm
 # exec awesome
 # while :; do

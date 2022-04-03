@@ -1,4 +1,4 @@
-*.font: FiraCode Nerd Font:size=11:antialias=true:autohint=true
+*.font: FiraCode Nerd Font Mono:size=11:antialias=true:autohint=true
 
 Xft.dpi:	96
 Xft.autohint:   0

@@ -12,9 +12,13 @@ use "junegunn/fzf.vim"
 use "airblade/vim-gitgutter"
 use "vimwiki/vimwiki"
 -- Customizations
+-- use {
+-- 	"dracula/vim",
+-- 	config = function() vim.api.nvim_command("colorscheme dracula") end
+-- }
 use {
-	"dracula/vim",
-	config = function() vim.api.nvim_command("colorscheme dracula") end,
+	"Minimal-Mistakes/vim",
+	config = function() vim.api.nvim_command("colorscheme minimalmistakes") end
 }
 use "junegunn/goyo.vim"
 use "mhinz/vim-startify"

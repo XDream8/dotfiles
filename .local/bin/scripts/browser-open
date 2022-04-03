@@ -1,0 +1,27 @@
+#!/bin/sh
+
+opts=">>h Select the browser you want to use
+Chromium(system)
+Firefox(chroot)
+Chromium(chroot)
+:r Quit"
+
+choice=$(printf '%s\n' "$opts" |  repomenu -ps 1 -l 13 -w -400 -i -h -1 -y -1 -c )
+
+case "$choice" in
+    *Quit)
+        echo "Program terminated." && exit 1
+    ;;
+    *Firefox*chroot*)
+	enter-chroot DISPLAY=$DISPLAY firefox
+    ;;
+    *Chromium*chroot*)
+	enter-chroot DISPLAY=$DISPLAY chromium --no-sandbox --enable-low-end-device-mode
+    ;;
+    *Chromium*system*)
+        chromium --enable-low-end-device-mode
+    ;;
+    *)
+        exit 1
+	;;
+esac
