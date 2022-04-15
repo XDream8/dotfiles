@@ -89,7 +89,7 @@ bindkey '^e' edit-command-line
 
 # Load plugins.
 source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/site-contrib/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bold,underline"
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"

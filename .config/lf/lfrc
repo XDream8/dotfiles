@@ -207,8 +207,10 @@ map U unselect
 map gtr cd ~/.local/share/Trash/files
 map gus cd /media/xdream8
 
-map gD cd ~/downloads
-map ge cd ~/desktop
+map gv cd ~/void/root/root
+
+map gD cd ~/files/Defaults/Downloads
+map ge cd ~/files/Defaults/Desktop
 
 map gc cd ~/.config
 map gC cd ~/.local/share/cell

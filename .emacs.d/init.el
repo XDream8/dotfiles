@@ -46,10 +46,10 @@
 (defvar efs/default-variable-font-size 100)
 
 ;; Fonts
-(set-face-attribute 'default nil :font "FiraCode Nerd Font" :height efs/default-font-size)
+(set-face-attribute 'default nil :font "FiraCode Nerd Font Mono" :height efs/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "FiraCode Nerd Font" :height efs/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "FiraCode Nerd Font Mono" :height efs/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Hack Nerd Font" :height efs/default-variable-font-size :weight 'regular)

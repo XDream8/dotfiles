@@ -11,7 +11,7 @@ super + p
 
 ## Internet
 super + w
-	luakit
+	browser-open
 
 #
 super + alt + a
