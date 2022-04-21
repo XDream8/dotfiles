@@ -38,4 +38,6 @@ alias \
 	dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 alias \
-	tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
+	tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" \
+	yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"' \
+	wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'

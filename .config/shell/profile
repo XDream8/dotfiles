@@ -5,8 +5,6 @@
 # If you don't plan on reverting to bash, you can remove the link in ~/.profile
 # to clean up.
 
-#export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
-# Adds `~/.local/bin` to $PATH
 export PATH="${$(find ~/.local/bin -type d -printf %p:)%%:}:/usr/lib/ccache/bin${PATH:+:}${PATH}"
 export CCACHE_DIR="/var/cache/ccache"
 
@@ -30,7 +28,7 @@ export LESSHISTFILE="-"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-# export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME/alsa"
+export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME/alsa/asoundrc"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
 export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
@@ -79,6 +77,10 @@ export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
+
+# vimrc
+export GVIMINIT='let $MYGVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/gvimrc" : "$XDG_CONFIG_HOME/nvim/init.gvim" | so $MYGVIMRC'
+export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$XDG_CONFIG_HOME/nvim/init.vim" | so $MYVIMRC'
 
 # export LIBGL_ALWAYS_SOFTWARE=1
 # export $(dbus-launch)

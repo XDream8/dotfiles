@@ -2,6 +2,7 @@
 
 opts=">>h Select the browser you want to use
 Chromium(system)
+Librewolf(flatpak)
 Firefox(chroot)
 Chromium(chroot)
 Luakit
@@ -23,6 +24,9 @@ case "$choice" in
   *Chromium*system*)
     chromium --enable-low-end-device-mode
   ;;
+	*Librewolf*flatpak*)
+		flatpak run io.gitlab.librewolf-community
+	;;
 	*Luakit)
 		luakit
 	;;

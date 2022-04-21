@@ -60,7 +60,7 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (show-paren-mode 1)
 
-(setq backup-directory-alist '(("." . "~/.emacs.d/saves")))
+(setq backup-directory-alist '(("." . "~/.config/emacs/saves")))
 
 (setq ido-everywhere t)
 (setq ido-enable-flex-matching t)
@@ -111,7 +111,7 @@
   (efs/leader-keys
     "t"  '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")
-    "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/Emacs.org")))))
+    "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.config/emacs/Emacs.org")))))
 
 (use-package evil
   :ensure t
