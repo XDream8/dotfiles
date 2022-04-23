@@ -1,0 +1,101 @@
+#################
+# DEFAULT STUFF #
+#################
+
+# Uncomment to get a placebo improvement in resampling.
+# May require packages and iirc had some issues with 32bit programs
+#defaults.pcm.rate_converter "speexrate"
+
+# This allows you to change the default with ALSA_DEFAULT_PCM env var
+pcm.!default {
+  @func refer
+  name { @func concat
+    strings [ "pcm."
+      { @func getenv
+      vars [ ALSA_DEFAULT_PCM ]
+      default "sym"
+      }
+    ]
+  }
+}
+
+pcm.sym {
+  type asym;
+  playback.pcm "out_mixer_plug"
+  capture.pcm  "mic_snoop_plug"
+}
+
+
+###########
+#  OUTPUT #
+###########
+
+
+pcm.out_mixer_plug {
+	type plug;
+	# slave.pcm "out_mixer"
+	slave.pcm "bluetooth"
+}
+
+pcm.bluetooth {
+  type bluealsa;
+	device "4F:0C:87:2C:87:3A"
+  profile "a2dp"
+}
+
+pcm.out_mixer {
+  type dmix;
+
+  # no idea what these dsnoop
+  ipc_key 4641
+  ipc_perm 0666
+
+	slave {
+    # THIS IS YOUR DEFAULT OUTPUT DEVICE !!!
+		pcm "hw:Intel,0,0"
+
+		rate 48000
+		channels 2
+		period_time 0
+
+		# Adjusts latency, this is on high side
+		# Some programs may not like short buffers, experiment yourself
+    period_size 1024
+    buffer_size 8192
+  }
+}
+
+##############
+# MICROPHONE #
+##############
+
+pcm.mic_snoop_plug {
+  type plug;
+  slave.pcm "mic_snoop";
+}
+
+pcm.mic_snoop {
+  type dsnoop
+
+  # no idea what these do
+  ipc_key 4641
+  ipc_perm 0666
+
+  slave {
+		# THIS IS YOUR DEFAULT MICROPHONE !!!
+		slave.pcm "hw:Intel,0,0"
+
+    period_time 0
+    period_size 512
+		buffer_size 2048
+    channels 2
+  }
+  bindings {
+      0 0
+      1 1
+  }
+}
+
+###########
+# THE END #
+###########

@@ -5,7 +5,7 @@
 # If you don't plan on reverting to bash, you can remove the link in ~/.profile
 # to clean up.
 
-export PATH="${$(find ~/.local/bin -type d -printf %p:)%%:}:/usr/lib/ccache/bin${PATH:+:}${PATH}"
+export PATH="${$(find ~/.local/bin -type d -printf %p:)%%:}:$HOME/.yarn/bin:/usr/lib/ccache/bin${PATH:+:}${PATH}"
 export CCACHE_DIR="/var/cache/ccache"
 
 unsetopt PROMPT_SP
@@ -28,7 +28,7 @@ export LESSHISTFILE="-"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME/alsa/asoundrc"
+# export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME/alsa/asoundrc"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
 export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"

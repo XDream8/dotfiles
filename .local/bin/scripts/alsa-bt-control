@@ -1,0 +1,47 @@
+#!/bin/sh
+
+#
+## Written by XDream8
+#
+
+asoundrc=${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc
+
+CheckConnection() {
+
+	if [ "$(bluetoothctl info | grep -i 'Connected: yes')" ] && [ "$(bluetoothctl info | grep -i 'Icon: audio-headset')" ]; then
+		connected=yes
+	else
+		connected=no
+	fi
+
+}
+
+ChangePlaybackDevice() {
+
+	if [ $connected = "yes" ]; then
+		[ "$(grep "\s\+# slave.pcm \"bluetooth\"" $asoundrc)" ] && sed -i 's/# slave.pcm "bluetooth"/slave.pcm "bluetooth"/g' $asoundrc
+		[ "$(grep "^[^#\;]slave.pcm \"out_mixer\"" $asoundrc)" ] && sed -i 's/slave.pcm "out_mixer"/# slave.pcm "out_mixer"/g' $asoundrc
+	else
+		[ "$(grep "^[^#\;]slave.pcm \"bluetooth\"" $asoundrc)" ] && sed -i 's/slave.pcm "bluetooth"/# slave.pcm "bluetooth"/g' $asoundrc
+		[ "$(grep "\s\+# slave.pcm \"out_mixer\"" $asoundrc)" ] && sed -i 's/# slave.pcm "out_mixer"/slave.pcm "out_mixer"/g' $asoundrc
+	fi
+
+}
+
+main() {
+
+	while true
+	do
+		# check bluetooth connection
+		CheckConnection
+
+		# printf '%s\n' "connected=$connected"
+
+		ChangePlaybackDevice
+
+		sleep 10
+	done
+
+}
+
+main
