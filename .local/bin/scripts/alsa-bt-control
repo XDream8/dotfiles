@@ -4,43 +4,70 @@
 ## Written by XDream8
 #
 
-asoundrc=${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc
+
+[ -z "$asoundrc" ] && asoundrc=${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc
+[ -z "$foronce" ] && foronce=0
 
 CheckConnection() {
-
 	if [ "$(bluetoothctl info | grep -i 'Connected: yes')" ] && [ "$(bluetoothctl info | grep -i 'Icon: audio-headset')" ]; then
 		connected=yes
 	else
 		connected=no
 	fi
+}
 
+# disable bluetooth headset and use the speaker defined in $asoundrc
+SetDefault() {
+	[ "$(grep "^[^#\;]slave.pcm \"bluetooth\"" $asoundrc)" ] && sed -i 's/slave.pcm "bluetooth"/# slave.pcm "bluetooth"/g' $asoundrc
+	[ "$(grep "\s\+# slave.pcm \"out_mixer\"" $asoundrc)" ] && sed -i 's/# slave.pcm "out_mixer"/slave.pcm "out_mixer"/g' $asoundrc
 }
 
 ChangePlaybackDevice() {
-
 	if [ $connected = "yes" ]; then
 		[ "$(grep "\s\+# slave.pcm \"bluetooth\"" $asoundrc)" ] && sed -i 's/# slave.pcm "bluetooth"/slave.pcm "bluetooth"/g' $asoundrc
 		[ "$(grep "^[^#\;]slave.pcm \"out_mixer\"" $asoundrc)" ] && sed -i 's/slave.pcm "out_mixer"/# slave.pcm "out_mixer"/g' $asoundrc
 	else
-		[ "$(grep "^[^#\;]slave.pcm \"bluetooth\"" $asoundrc)" ] && sed -i 's/slave.pcm "bluetooth"/# slave.pcm "bluetooth"/g' $asoundrc
-		[ "$(grep "\s\+# slave.pcm \"out_mixer\"" $asoundrc)" ] && sed -i 's/# slave.pcm "out_mixer"/slave.pcm "out_mixer"/g' $asoundrc
+		SetDefault
 	fi
-
 }
 
 main() {
 
-	while true
-	do
-		# check bluetooth connection
-		CheckConnection
+	if [ ! -f "$asoundrc" ]; then
+		printf '%s\n' "asoundrc file does not exist"
+		exit 1
+	fi
 
-		# printf '%s\n' "connected=$connected"
+	# default(Bluetooth disabled)
+	SetDefault
 
-		ChangePlaybackDevice
+	if [ $foronce = 1 ]; then
+		if [ "$(rc-service bluetooth status | grep 'status: started')" ]; then
+			# check bluetooth connection
+			CheckConnection
 
-		sleep 10
-	done
+			# printf '%s\n' "connected=$connected"
+
+			ChangePlaybackDevice
+		else
+			SetDefault
+		fi
+	else
+		while true; do
+			if [ "$(rc-service bluetooth status | grep 'status: started')" ]; then
+				# check bluetooth connection
+				CheckConnection
+
+				# printf '%s\n' "connected=$connected"
+
+				ChangePlaybackDevice
+
+				sleep 10
+			else
+				SetDefault
+			fi
+		done
+	fi
 
 }
 

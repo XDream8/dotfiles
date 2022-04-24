@@ -1,5 +1,5 @@
 #!/bin/sh
-currdir=$PWD
+
 cd ~xdream8/void
 [ -z "$CONFIG" ] && CONFIG=./config
 . "$CONFIG"
@@ -63,9 +63,13 @@ set_title() {
 	printf "\033]2;%s\007" "$1"
 }
 
+# update alsa config
+rm -f $R/etc/asound.conf
+cp ${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc $R/etc/asound.conf
+
 if [ -n "$1" ]; then
     $linux32 "$CHROOT" "$R" /bin/env -i \
-        HOME=/root PATH="/local/bin:/bin" TERM="$TERM" PS1='\u:\w$ ' \
+        HOME=/root PATH="/local/bin:/bin" TERM="$TERM" PS1='\u:\w$ ' DISPLAY=$DISPLAY \
 	"$@"
 	ret=$?
 else
@@ -73,11 +77,9 @@ else
 
     echo "Entering chroot..."
 
-		[ "$@" ] && program=$@ || program=
-
     $linux32 "$CHROOT" "$R" /bin/env -i \
         HOME=/root TERM="$TERM" PS1='\u:\w$ ' DISPLAY=$DISPLAY \
-				/bin/bash --login $program
+				/bin/bash --login
 	ret=$?
 
 	#echo empty line so we get a proper prompt back
@@ -104,5 +106,5 @@ if [ "$CHROOT" = "chroot" ] && [ -d "$R"/dev/pts ] ; then
 	tryumount "$R"/proc
 fi
 
-cd $currdir
+cd $H
 exit $ret

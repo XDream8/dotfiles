@@ -33,8 +33,8 @@ pcm.sym {
 
 pcm.out_mixer_plug {
 	type plug;
-	# slave.pcm "out_mixer"
-	slave.pcm "bluetooth"
+	slave.pcm "out_mixer"
+	# slave.pcm "bluetooth"
 }
 
 pcm.bluetooth {
