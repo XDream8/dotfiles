@@ -62,6 +62,14 @@
 
 (setq backup-directory-alist '(("." . "~/.config/emacs/saves")))
 
+(setq erc-prompt (lambda () (concat "[" (buffer-name) "]"))
+			erc-server "irc.libera.chat"
+			erc-nick "xdream8"
+			erc-auto-query 'bury
+			erc-fill-column 100
+			erc-fill-function 'erc-fill-static
+			erc-fill-static-center 20)
+
 (setq ido-everywhere t)
 (setq ido-enable-flex-matching t)
 (ido-mode t)

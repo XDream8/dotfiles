@@ -15,7 +15,6 @@ elif [ "$R" = / ] ; then
 	exit 1
 fi
 
-mkdir -p "$R"/src/tarballs
 linux32=
 if [ $(uname -m) = "x86_64" ] ; then
 case "$A" in i?86)
@@ -52,7 +51,6 @@ else
 		mount --bind /dev/pts "$R"/dev/pts
 		mount --bind /dev/shm "$R"/dev/shm
 		mount --bind /proc "$R"/proc
-		mount --bind "$C" "$R"/src/tarballs
 	fi
 
 	CHROOT=chroot
@@ -62,6 +60,11 @@ set_title() {
 	[ "$TERM" != "linux" ] && [ "$TERM" != "vt100" ] && \
 	printf "\033]2;%s\007" "$1"
 }
+
+# needed for bluez-alsa
+# rm -rf "$R"/run
+# mkdir -p "$R"/run
+# cp -r /run/dbus "$R"/run/
 
 # update alsa config
 rm -f $R/etc/asound.conf
@@ -99,7 +102,6 @@ tryumount() {
 }
 
 if [ "$CHROOT" = "chroot" ] && [ -d "$R"/dev/pts ] ; then
-	tryumount "$R"/src/tarballs
 	tryumount "$R"/dev/pts
 	tryumount "$R"/dev/shm
 	tryumount "$R"/dev
