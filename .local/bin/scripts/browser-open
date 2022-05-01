@@ -2,7 +2,6 @@
 
 opts=">>h Select the browser you want to use
 Chromium(system)
-Librewolf(flatpak)
 Firefox(chroot)
 Chromium(chroot)
 Luakit
@@ -23,14 +22,6 @@ case "$choice" in
   ;;
   *Chromium*system*)
     chromium --enable-low-end-device-mode
-  ;;
-	*Librewolf*flatpak*)
-		asoundrc=~xdream8/.var/app/io.gitlab.librewolf-community/config/alsa/asoundrc
-		# update alsa config
-		rm -f $asoundrc
-		cp ${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc $asoundrc
-
-		flatpak run io.gitlab.librewolf-community
 	;;
 	*Luakit)
 		luakit

@@ -57,15 +57,12 @@ main() {
 				# check bluetooth connection
 				CheckConnection
 
-				# printf '%s\n' "connected=$connected"
-
 				ChangePlaybackDevice
-
-				# update every 10 seconds
-				sleep 10
 			else
 				SetDefault
 			fi
+			# update every 10 seconds
+			sleep 10
 		done
 	fi
 
