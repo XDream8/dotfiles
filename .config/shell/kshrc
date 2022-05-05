@@ -1,0 +1,29 @@
+#!/bin/ksh
+
+stty stop undef     # Disable ctrl-s to freeze terminal.
+
+alias source='.'
+
+## completion
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/ksh_completion" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/ksh_completion"
+
+# Load aliases and shortcuts if existent.
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+
+# i am sure there is better way but whatever
+PS1='$(print "\033[0;31m")[$(print "\033[1;33m")${USER:=$(id -un)}'"$(print "\033[1;32m")@$(print "\033[0;34m")${HOSTNAME:=$(hostname)} $(print "\033[0;35m")\$PWD$(print "\033[0;31m")] $(print "\033[0m")$(if [ ! "$USER" = root ]; then print \$; else print \#; fi) "
+
+set -o emacs
+
+# vi mode
+export KEYTIMEOUT=1
+
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp" >/dev/null
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
