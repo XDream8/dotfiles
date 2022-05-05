@@ -28,9 +28,6 @@ Xft.lcdfilter:  lcddefault
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
 
-/* ST */
-st.alpha: 1
-
 /* URxvt.font: xft:FiraCode Nerd Font:size=11,xft:JoyPixels:size=11,xft:FontAwesome:size=11,xft:Noto Emoji */
 URxvt.font: xft:FiraCode Nerd Font Mono:size=11
 URxvt.letterSpace: -1

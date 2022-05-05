@@ -6,5 +6,5 @@ else
 	. "$HOME/.xprofile"
 fi
 
-# exec bspwm
-exec spectrwm
+exec bspwm
+# exec spectrwm
