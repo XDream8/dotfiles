@@ -1,11 +1,23 @@
 #!/bin/ksh
 
+#--------------#
+# Requirements #
+#--------------#
+#     sed      #
+#     find     #
+#--------------#
+
 ## doas
 set -A complete_doas_1 -- -C -L -a -n -s -u - $(find /usr/bin/ /usr/sbin/ /sbin/ /bin/ $HOME/.local/bin -type f -executable | sed 's/.*\///' )
 ## rdo
 set -A complete_rdo_1 -- $(find /usr/bin/ /usr/sbin/ /sbin/ /bin/ $HOME/.local/bin -type f -executable | sed 's/.*\///' )
 ## chromium
 set -A complete_chromium_1 -- --app --incognito --new-window --no-proxy-server --password-store --proxy-auto-detect --proxy-pac-url --proxy-server --user-data-dir --version
-## echo, printf
+## echo, printf; complete environment variables
 set -A complete_echo_1 -- $(env | sed 's/=.*//' | sed 's/^/$/') *
 set -A complete_printf_1 -- $(env | sed 's/=.*//' | sed 's/^/$/') *
+## fm6000
+set -A complete_fm6000_1 -- --color --wally --dogbert --alice --phb --asok --random --file --not_de --os --kernel --de --shell --uptime  --package --vnstat --margin --gap --length
+## tmux
+set -A complete_tmux -- -2 -C $(printf '%s' "-c $(sed '/#/d' < /etc/shells)") -D -f -L -l -N -S -u -Tfeatures -u -v -V
+##

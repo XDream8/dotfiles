@@ -11,7 +11,7 @@ alias source='.'
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
 
 # i am sure there is better way but whatever
-PS1='$(print "\033[0;31m")[$(print "\033[1;33m")${USER:=$(id -un)}'"$(print "\033[1;32m")@$(print "\033[0;34m")${HOSTNAME:=$(hostname)} $(print "\033[0;35m")\$PWD$(print "\033[0;31m")] $(print "\033[0m")$(if [ ! "$USER" = root ]; then print \$; else print \#; fi) "
+PS1='$(print "\033[0;31m")[$(print "\033[1;33m")${USER:=$(id -un)}'"$(print "\033[1;32m")@$(print "\033[0;34m")${HOSTNAME:=$(hostname)} $(print "\033[0;35m")\$PWD$(print "\033[0;31m")] $(if [ ! "$USER" = root ]; then print \$; else print \#; fi)$(print "\033[1;32m") "
 
 set -o emacs
 
