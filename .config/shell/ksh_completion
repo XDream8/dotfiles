@@ -22,3 +22,4 @@ set -A complete_fm6000_1 -- --color --wally --dogbert --alice --phb --asok --ran
 set -A complete_tmux -- -2 -C $(printf '%s' "-c $(sed '/#/d' < /etc/shells)") -D -f -L -l -N -S -u -Tfeatures -u -v -V
 ## xclip
 set -A complete_xclip -- -in -out -loops -display -help -selection -noutf8 -target -rmlastnl -version -silent -quiet -verbose
+set -A complete_xclip_2 -- clipboard
