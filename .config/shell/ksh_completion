@@ -11,9 +11,10 @@
 
 ## this is to stop using same command twice
 progs="$(find /usr/bin/ /usr/sbin/ /sbin/ /bin/ /usr/local/bin /usr/local/sbin $HOME/.local/bin -executable -printf "%f\n" | sort | uniq)"
-man_pages="$(find /usr/share/man /usr/local/share/man -iregex ".*[1-9]" -printf '%f\n' | sort | uniq)"
+man_pages="$(find /usr/share/man /usr/local/share/man -type f -printf '%f\n' | sort | sed 's/\..*//g' | uniq)"
 env_variables="$(printenv | sed --posix 's/=.*//; s/^/$/' | sort)"
-shells="$(sed --posix '/#/d' < /etc/shells)"
+shells="$(sed --posix '/#/d' < /etc/shells &)"
+installed_packages="$(find /var/db/pkg/*/* -type d | sed 's/.*\/pkg\///; s/-[0-9].*//')"
 
 ## doas
 set -A complete_doas_1 -- -C -L -a -n -s -u - $progs
@@ -21,6 +22,12 @@ set -A complete_doas_1 -- -C -L -a -n -s -u - $progs
 set -A complete_rdo_1 -- $progs
 ## man
 set -A complete_man_1 -- $man_pages
+## emerge
+set -A complete_emerge_1 -- -u -D -N -v -a -c -C
+###
+set -A complete_emerge_2 -- $installed_packages
+set -A complete_eix -- $installed_packages
+set -A complete_equery -- $installed_packages
 ## chromium
 set -A complete_chromium_1 -- --app --incognito --new-window --no-proxy-server --password-store --proxy-auto-detect --proxy-pac-url --proxy-server --user-data-dir --version
 ## echo, printf; complete environment variables
