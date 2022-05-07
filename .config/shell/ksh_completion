@@ -4,22 +4,36 @@
 # Requirements #
 #--------------#
 #     sed      #
+#     sort     #
+#     uniq     #
 #     find     #
 #--------------#
 
+## this is to stop using same command twice
+progs="$(find /usr/bin/ /usr/sbin/ /sbin/ /bin/ /usr/local/bin /usr/local/sbin $HOME/.local/bin -executable -printf "%f\n" | sort | uniq)"
+man_pages="$(find /usr/share/man /usr/local/share/man -iregex ".*[1-9]" -printf '%f\n' | sort | uniq)"
+env_variables="$(printenv | sed --posix 's/=.*//; s/^/$/' | sort)"
+shells="$(sed --posix '/#/d' < /etc/shells)"
+
 ## doas
-set -A complete_doas_1 -- -C -L -a -n -s -u - $(find /usr/bin/ /usr/sbin/ /sbin/ /bin/ $HOME/.local/bin -executable | sed 's/.*\///' )
+set -A complete_doas_1 -- -C -L -a -n -s -u - $progs
 ## rdo
-set -A complete_rdo_1 -- $(find /usr/bin/ /usr/sbin/ /sbin/ /bin/ $HOME/.local/bin -executable | sed 's/.*\///' )
+set -A complete_rdo_1 -- $progs
+## man
+set -A complete_man_1 -- $man_pages
 ## chromium
 set -A complete_chromium_1 -- --app --incognito --new-window --no-proxy-server --password-store --proxy-auto-detect --proxy-pac-url --proxy-server --user-data-dir --version
 ## echo, printf; complete environment variables
-set -A complete_echo_1 -- $(env | sed 's/=.*//' | sed 's/^/$/') *
-set -A complete_printf_1 -- $(env | sed 's/=.*//' | sed 's/^/$/') *
+set -A complete_echo -- $env_variables
+set -A complete_printf -- $env_variables
 ## fm6000
 set -A complete_fm6000_1 -- --color --wally --dogbert --alice --phb --asok --random --file --not_de --os --kernel --de --shell --uptime  --package --vnstat --margin --gap --length
 ## tmux
-set -A complete_tmux -- -2 -C $(printf '%s' "-c $(sed '/#/d' < /etc/shells)") -D -f -L -l -N -S -u -Tfeatures -u -v -V
+set -A complete_tmux_1 -- -2 -C -c -D -f -L -l -N -S -u -Tfeatures -u -v -V
+set -A complete_tmux_2 -- $shells
+## chsh
+set -A complete_chsh_1 -- -h --help -R --root -s --shell
+set -A complete_chsh_2 -- $shells
 ## xclip
 set -A complete_xclip -- -in -out -loops -display -help -selection -noutf8 -target -rmlastnl -version -silent -quiet -verbose
 set -A complete_xclip_2 -- clipboard
