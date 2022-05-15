@@ -1,6 +1,10 @@
 #!/bin/ksh
 
 stty stop undef     # Disable ctrl-s to freeze terminal.
+stty columns 1000
+
+#
+export COLUMNS=1000
 
 alias source='.'
 
@@ -11,7 +15,7 @@ alias source='.'
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
 
 # i am sure there is better way but whatever
-PS1="\[\033[0;31m\][\[\033[1;33m\]\u\[\033[1;32m\]@\[\033[0;34m\]\h \[\033[0;35m\]\w\[\033[0;31m\]] \[\033[0m\]\$ "
+PS1="\[\[\033[0;31m\][\[\033[1;33m\]\u\[\033[1;32m\]@\[\033[0;34m\]\h \[\033[0;35m\]\w\[\033[0;31m\]] \[\033[0m\]\$ "
 
 set -o emacs
 

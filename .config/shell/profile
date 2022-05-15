@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/zsh
 
 # zsh profile file. Runs on login. Environmental variables are set here.
 
@@ -74,7 +74,7 @@ export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 
 # ksh
-export ENV="$XDG_CONFIG_HOME/shell/kshrc"
+# export ENV="$XDG_CONFIG_HOME/shell/kshrc"
 
 # export LIBGL_ALWAYS_SOFTWARE=1
 # export $(dbus-launch)
