@@ -1,0 +1,83 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+[line_break]
+disabled=true
+
+# Replace the "❯" symbol in the prompt with "➜"
+#[character]                            # The name of the module we are configuring is "character"
+#success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+
+[aws]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+read_only = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+#disabled=true
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+#disabled=true
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+#disabled=true
+
+[package]
+symbol = " "
+#disabled=true
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+#disabled=true
+
+[ruby]
+symbol = " "
+#disabled=true
+
+[rust]
+symbol = " "
+#disabled=true
+
+[swift]
+symbol = "ﯣ "

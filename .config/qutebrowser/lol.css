@@ -1,0 +1,16 @@
+/* Reddit */
+.promotedlink,
+.ad-container,
+.premium-banner-outer {
+  display: none !important;
+}
+
+/* Google */
+div#taw {
+  display: none !important;
+}
+
+/* Youtube */
+ytd-rich-item-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(1) {
+  display: none !important;
+}
