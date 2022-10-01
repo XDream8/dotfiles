@@ -1,0 +1,14 @@
+#!/bin/sh
+
+terminal=${TERMINAL:-st}
+
+if [ ! "$(command -v bluetoothctl)" ]; then
+	bluetooth="false"
+fi
+
+# shellcheck disable=2143
+if [ ! "$bluetooth" = "false" ] && [ "$(bluetoothctl info | grep -i 'Connected: yes')" ] && [ "$(bluetoothctl info | grep -i 'Icon: audio-headset')" ]; then
+	setsid "$terminal" -T AlsaMixer -e alsamixer -D bluealsa &
+else
+	setsid "$terminal" -T AlsaMixer -e alsamixer &
+fi

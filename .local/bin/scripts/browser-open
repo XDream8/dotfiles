@@ -1,0 +1,71 @@
+#!/bin/sh -e
+
+launcher="${LAUNCHER:-fuzzel -dR}"
+
+open() {
+	if [ ! "$WAYLAND_DISPLAY" = "" ] && [ "$chroot" = "1" ]; then
+		setsid enter-chroot "$2" &
+	elif [ ! "$WAYLAND_DISPLAY" = ""  ]; then
+		setsid "$1" &
+	elif [ "$chroot" = "1" ]; then
+		setsid enter-chroot "$2" &
+	else
+		setsid "$1" &
+	fi
+}
+
+addopt() {
+	if [ "$opts" = "" ]; then
+		opts="$1"
+	else
+		opts="$opts
+$1"
+	fi
+}
+
+check() {
+	if [ "$(command -v "$1")" ]; then
+		addopt "$1"
+	fi
+	if [ "$(enter-chroot sh -c "[ \"$(command -v "$1")\"   ] && echo 0 || echo 1")" = "1" ]; then
+		addopt "$1 - Chroot"
+	fi
+}
+
+for i in chromium firefox luakit vimb; do
+	check "$i"
+done
+
+addopt "Quit"
+
+choice=$(printf '%s\n' "$opts" | $launcher)
+
+case "$choice" in
+*Chroot*)
+	chroot="1"
+	;;
+*)
+	chroot="0"
+	;;
+esac
+
+case "$choice" in
+*Quit)
+	echo "Program terminated." && exit 1
+	;;
+*firefox*)
+		open "firefox" "firefox-wayland"
+	;;
+*chromium*)
+		open "chromium --enable-low-end-device-mode" "chromium --no-sandbox --enable-low-end-device-mode"
+	;;
+*Luakit*)
+		open "luakit" "luakit"
+	;;
+*Vimb*)
+		open "vimb" "vimb"
+	;;
+*)
+	exit 1
+	;;
+esac

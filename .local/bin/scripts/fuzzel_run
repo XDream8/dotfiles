@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+# path="$(grep "export PATH=" $HOME/.profile | awk -F\" '{print $2}' | sed 's/:$PATH//')"
+# export PATH="$path:$PATH"
+
+path="$(printf '%s' "$PATH" | tr ":" " ")"
+
+# shellcheck disable=2086
+progs="$(find $path -print 2>/dev/null | sed 's/.*\///g' | sort)"
+
+choice="$(printf '%s' "$progs" | fuzzel -d "$@")"
+
+case "$choice" in
+	'')
+		exit 1
+	;;
+	*)
+		setsid "$choice" &
+esac

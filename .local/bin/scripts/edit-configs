@@ -1,0 +1,46 @@
+#!/bin/sh
+
+launcher=${LAUNCHER:-fuzzel -dR}
+term=${TERMINAL:-foot}
+graphical=0
+editor=${EDITOR:-vim}
+
+options="alacritty - ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
+awesome - ${XDG_CONFIG_HOME}/awesome/rc.lua
+bash - ${HOME}/.bashrc
+emacs/init.el - ${XDG_CONFIG_HOME}/emacs/init.el
+neovim - ${XDG_CONFIG_HOME}/nvim
+qutebrowser-quickmarks - ${XDG_CONFIG_HOME}/qutebrowser/quickmarks
+qutebrowser - ${XDG_CONFIG_HOME}/qutebrowser/config.py
+bspwm - ${XDG_CONFIG_HOME}/bspwm/bspwmrc
+sxhkd - ${XDG_CONFIG_HOME}/sxhkd/sxhkdrc
+vim - ${HOME}/.vim
+vimb - ${XDG_CONFIG_HOME}/vimb
+xresources - ${XDG_CONFIG_HOME}/x11/Xresources
+profile - ${HOME}/.profile
+yash - ${HOME}/.yashrc
+zsh - ${XDG_CONFIG_HOME}/zsh/.zshrc
+Quit"
+
+choice=$(printf '%s' "$options" | $launcher )
+
+file="${choice#*- }"
+
+if [ "$choice" = "Quit" ]; then
+	exit 0
+elif [ ! -f "$file" ] && [ ! -d "$file" ]; then
+	if [ "$(command -v notify-send)" ]; then
+		notify-send "could not find config file or directory"
+	else
+		printf '%s\n' "could not find config file or directory"
+	fi
+	exit 1
+fi
+
+if [ $graphical = '0' ]; then
+	$term -e "$editor" "$file"
+else
+	$editor "$file"
+fi
+
+exit 0

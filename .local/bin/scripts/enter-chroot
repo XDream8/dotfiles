@@ -1,0 +1,116 @@
+#!/bin/sh
+
+cd ~xdream8/void || return 1
+[ -z "$CONFIG" ] && CONFIG=./config
+# shellcheck disable=1090
+. "$CONFIG"
+export H="$PWD"
+ret=0
+
+if [ -z "$R" ] ; then
+	echo 'no R environment var set, your config is broken'
+	exit 1
+elif [ "$R" = / ] ; then
+	echo "error: R=/ can't be used with this script, as it would make"
+	echo "your host sys unusable after returning. (umounting /dev /proc...)"
+	exit 1
+fi
+
+linux32=
+if [ "$(uname -m)" = "x86_64" ] ; then
+case "$A" in i?86)
+	echo "trying to get into 32bit rootfs from 64bit host"
+	# shellcheck disable=2015
+	[ -x ./linux32 ] && linux32=./linux32 || {
+		$CC "$K"/linux32.c -static -s -Os -o ./linux32 && linux32=./linux32 || \
+		printf '%s\n%s' "warning: trying to chroot into i386 rootfs on x86_64" \
+		         "kernel and building linux32 command failed\n"
+	} ;;
+esac
+fi
+
+uid="$(id -u)"
+if [ -d /proc/self/ns ] ; then
+	CHROOT=./super_chroot
+	if [ ! -x "$CHROOT" ] ; then
+		if ! $CC "$K"/super_chroot.c -static -s -Os -o "$CHROOT" 2>/dev/null ; then
+			echo "error: failed to build super_chroot!"
+			echo "try: musl-gcc KEEP/super_chroot.c -o super_chroot"
+			echo "or: re-run ./enter-chroot as root."
+			exit 1
+		fi
+	fi
+else
+	if [ "$uid" != "0" ]; then
+	    printf -- "need to be root. please enter password.\n"
+	    su -c "$0"
+	    exit $?
+	fi
+
+	# prevent from mounting twice
+	if [ ! -d "$R"/dev/pts ] ; then
+		mount --bind /dev "$R"/dev
+		mount --bind /dev/pts "$R"/dev/pts
+		mount --bind /dev/shm "$R"/dev/shm
+		mount --bind /proc "$R"/proc
+		mount --bind /tmp "$R"/tmp
+	fi
+
+	CHROOT=chroot
+fi
+
+set_title() {
+	[ "$TERM" != "linux" ] && [ "$TERM" != "vt100" ] && \
+	printf "\033]2;%s\007" "$1"
+}
+
+# needed for bluez-alsa
+# rm -rf "$R"/run
+# mkdir -p "$R"/run
+# cp -r /run/dbus "$R"/run/
+
+# update alsa config
+rm -f "$R"/etc/asound.conf
+cp "${XDG_CONFIG_HOME:-$HOME/.config}"/alsa/asoundrc "$R"/etc/asound.conf
+
+if [ -n "$1" ]; then
+    $linux32 "$CHROOT" "$R" /bin/env -i \
+		HOME=/root PATH="/local/bin:/bin" TERM="$TERM" PS1='\u:\w$ ' WAYLAND_DISPLAY="$WAYLAND_DISPLAY" XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir" \
+	"$@"
+	ret=$?
+else
+    set_title "VoidLinux CHROOT $(basename "$R")"
+
+    echo "Entering chroot..."
+
+    $linux32 "$CHROOT" "$R" /bin/env -i \
+		HOME=/root TERM="$TERM" PS1='\u:\w$ ' WAYLAND_DISPLAY="$WAYLAND_DISPLAY" XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir" \
+				/bin/bash --login
+	ret=$?
+
+	#echo empty line so we get a proper prompt back
+	echo
+fi
+
+tryumount() {
+	dest="$1"
+	if ! umount "$dest" 2>/dev/null; then
+		echo "unmount failure ($dest), retrying in 1 sec..."
+		sleep 1
+		if ! umount -f "$dest" 2>/dev/null; then
+		  echo "unmount -f failure ($dest), trying last resort umount -l"
+		  umount -l "$dest"
+		fi
+	fi
+}
+
+if [ "$CHROOT" = "chroot" ] && [ -d "$R"/dev/pts ] ; then
+	tryumount "$R"/dev/pts
+	tryumount "$R"/dev/shm
+	tryumount "$R"/dev
+	tryumount "$R"/proc
+	tryumount "$R"/tmp
+fi
+
+cd "$H" || ret=1
+exit $ret
