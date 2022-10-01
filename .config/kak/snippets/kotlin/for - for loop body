@@ -1,3 +1,0 @@
-for (${1:Value} in ${2:Iterator}) {
-	${0: \\ body}
-}

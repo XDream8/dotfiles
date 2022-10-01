@@ -1,3 +1,0 @@
-do {
-	${1:Body}
-} while (${0:Clause})

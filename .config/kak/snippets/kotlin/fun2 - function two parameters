@@ -1,3 +1,0 @@
-fun ${1:Name}(${2:Param}: ${3:Type}, ${4:Param}: ${5:Type}) : ${6:Return} {
-	${0:// body-7}
-}

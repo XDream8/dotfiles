@@ -1,9 +1,0 @@
-package ${1:Name}
-
-
-import tornadofx.*
-
-
-class ${2:Name} : App(${3:Class}::class) {
-	${0:// body-4}
-}

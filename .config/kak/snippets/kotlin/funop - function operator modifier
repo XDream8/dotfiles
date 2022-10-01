@@ -1,1 +1,0 @@
-operator fun ${1:Object}.${2:Method}(${3:Parameter}: ${4:Type}): ${0:Return-5}

@@ -1,3 +1,0 @@
-object : ${1:Supertype} {
-	${0:// body-2}
-}

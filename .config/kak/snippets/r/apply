@@ -1,1 +1,0 @@
-apply(${1:array}, ${2:margin}, ${3:...})

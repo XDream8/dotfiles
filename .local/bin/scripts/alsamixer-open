@@ -1,9 +1,0 @@
-#!/bin/sh
-
-terminal=${TERMINAL:-st}
-
-if [ "$(bluetoothctl info | grep -i 'Connected: yes')" ] && [ "$(bluetoothctl info | grep -i 'Icon: audio-headset')" ]; then
-	$terminal -t AlsaMixer -e alsamixer -D bluealsa
-else
-	$terminal -t AlsaMixer -e alsamixer
-fi

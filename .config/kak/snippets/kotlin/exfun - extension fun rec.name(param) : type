@@ -1,3 +1,0 @@
-fun ${1:Receiver}.${2:Name}(${3:Param}) : ${4:Return} {
-	${0:// body-5}
-}

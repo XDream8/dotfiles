@@ -1,3 +1,0 @@
-for (${1:Var} in ${2:Iterable}) {
-	${0:// body-3}
-}

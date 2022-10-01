@@ -1,1 +1,0 @@
-tapply(${1:vector}, ${2:index}, ${3:function})
