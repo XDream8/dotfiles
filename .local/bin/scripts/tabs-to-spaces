@@ -18,7 +18,7 @@ Usage: tabs-to-spaces <options>
 		-c=* | --count=*)
 			space_count="${opt#*=}"
 		;;
-		-f=* | --file*=*=)
+		-f=* | --file*=*)
 			file="${opt#*=}"
 		;;
 		*)
