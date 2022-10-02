@@ -5,7 +5,7 @@ launcher="${LAUNCHER:-fuzzel -dR}"
 open() {
 	if [ ! "$WAYLAND_DISPLAY" = "" ] && [ "$chroot" = "1" ]; then
 		setsid enter-chroot "$2" &
-	elif [ ! "$WAYLAND_DISPLAY" = ""  ]; then
+	elif [ ! "$WAYLAND_DISPLAY" = "" ]; then
 		setsid "$1" &
 	elif [ "$chroot" = "1" ]; then
 		setsid enter-chroot "$2" &
@@ -54,16 +54,16 @@ case "$choice" in
 	echo "Program terminated." && exit 1
 	;;
 *firefox*)
-		open "firefox" "firefox-wayland"
+	open "firefox" "firefox-wayland"
 	;;
 *chromium*)
-		open "chromium --enable-low-end-device-mode" "chromium --no-sandbox --enable-low-end-device-mode"
+	open "chromium --enable-low-end-device-mode" "chromium --no-sandbox --enable-low-end-device-mode"
 	;;
-*Luakit*)
-		open "luakit" "luakit"
+*luakit*)
+	open "luakit" "luakit"
 	;;
-*Vimb*)
-		open "vimb" "vimb"
+*vimb*)
+	open "vimb" "vimb"
 	;;
 *)
 	exit 1

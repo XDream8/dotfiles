@@ -22,7 +22,7 @@ yash - ${HOME}/.yashrc
 zsh - ${XDG_CONFIG_HOME}/zsh/.zshrc
 Quit"
 
-choice=$(printf '%s' "$options" | $launcher )
+choice=$(printf '%s' "$options" | $launcher)
 
 file="${choice#*- }"
 

@@ -21,6 +21,9 @@ set $term /usr/bin/footclient
 # on the original workspace that the command was run on.
 set $menu ~xdream8/.local/bin/scripts/fuzzel_run
 
+set $browser-menu ~xdream8/.local/bin/scripts/browser-menu
+set $config-menu ~xdream8/.local/bin/scripts/config-menu
+
 exec /usr/bin/foot --server
 exec /usr/bin/wlsunset
 
@@ -47,6 +50,7 @@ input "type:keyboard" {
     repeat_delay 300
     repeat_rate 60
 }
+
 input "type:pointer" {
 	accel_profile "flat"
 	pointer_accel "0.5"
@@ -64,6 +68,9 @@ input "type:pointer" {
 
     # Start your launcher
     bindsym $mod+p exec $menu
+    ## menu scripts
+    bindsym $mod+Shift+w exec $browser-menu
+    bindsym $mod+Shift+e exec $config-menu
 
     bindsym $mod+$alt+r exec $term -T NNN -e nnn
     bindsym $mod+Shift+r exec $term -T HTOP -e htop

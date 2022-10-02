@@ -4,29 +4,29 @@ file=""
 
 for opt in "$@"; do
 	case "$opt" in
-		-h | --help)
-			# shellcheck disable=2140
-			printf '%s\n' "----  tabs-to-spaces script  ----
+	-h | --help)
+		# shellcheck disable=2140
+		printf '%s\n' "----  tabs-to-spaces script  ----
 Usage: tabs-to-spaces <options>
 
   -h,           --help             Shows this page
   -c=<number>,  --count=<number>   Number of spaces to use(defaults to 4)
   -f="\<files\>", --files="\<files\>"  Files
 "
-			exit 1
+		exit 1
 		;;
-		-c=* | --count=*)
-			space_count="${opt#*=}"
+	-c=* | --count=*)
+		space_count="${opt#*=}"
 		;;
-		-f=* | --file*=*)
-			file="${opt#*=}"
+	-f=* | --file*=*)
+		file="${opt#*=}"
 		;;
-		*)
-			if [ "$file" = "" ]; then
-				file="$opt"
-			else
-				file="$file $opt"
-			fi
+	*)
+		if [ "$file" = "" ]; then
+			file="$opt"
+		else
+			file="$file $opt"
+		fi
 		;;
 	esac
 done
@@ -48,7 +48,7 @@ done
 for i in $file; do
 	if [ -f "$i" ]; then
 		printf '%s' "$i - tabs >> spaces: "
-		sed "s/\t/$spaces/g" "$i" > _
+		sed "s/\t/$spaces/g" "$i" >_
 		mv -f _ "$i" && printf '%s\n' "done"
 	else
 		printf '%s\n' "$i does not exists"

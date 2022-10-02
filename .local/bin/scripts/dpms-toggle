@@ -28,10 +28,10 @@ toggle() {
 
 report() {
 	printf '%s\n' \
-"             Informations
+		"             Informations
 -------------------------------------"
 	[ "$(xset -q | grep -i "DPMS is Enabled")" ] && printf '%s\n' "Status: DPMS is Enabled"
-	[ "$(xset -q | grep -i "DPMS is Disabled")"  ] && printf '%s\n' "Status: DPMS is Disabled"
+	[ "$(xset -q | grep -i "DPMS is Disabled")" ] && printf '%s\n' "Status: DPMS is Disabled"
 }
 
 main() {
@@ -41,20 +41,20 @@ main() {
 }
 
 case $1 in
-	-h|--help)
-		printf '%s\n' \
-"               Flags
+-h | --help)
+	printf '%s\n' \
+		"               Flags
 -------------------------------------
 -h, --help        shows this
 
 -q, --query       shows informations
 "
 	;;
-	-q|--query)
-		report
-		exit 1
+-q | --query)
+	report
+	exit 1
 	;;
-	*)
-		main
+*)
+	main
 	;;
 esac
