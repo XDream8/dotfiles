@@ -55,6 +55,7 @@ else
 		mount --bind /dev/shm "$R"/dev/shm
 		mount --bind /proc "$R"/proc
 		mount --bind /tmp "$R"/tmp
+		mount --bind /home/xdream8 "$R"/root
 	fi
 
 	CHROOT=chroot
@@ -114,6 +115,7 @@ if [ "$CHROOT" = "chroot" ] && [ -d "$R"/dev/pts ]; then
 	tryumount "$R"/dev
 	tryumount "$R"/proc
 	tryumount "$R"/tmp
+	tryumount "$R"/root
 fi
 
 cd "$H" || ret=1

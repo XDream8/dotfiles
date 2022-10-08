@@ -189,6 +189,4 @@ ex=🎯:\
 *.java=♨:\
 "
 
-if [ -e /home/xdream8/.nix-profile/etc/profile.d/nix.sh ]; then . /home/xdream8/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
 [ "$(tty)" = "/dev/tty1" ] && ! pidof -s sway >/dev/null 2>&1 && exec sway
