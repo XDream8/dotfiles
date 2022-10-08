@@ -19,10 +19,11 @@ set $term /usr/bin/footclient
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu ~xdream8/.local/bin/scripts/fuzzel_run
+# set $menu ~xdream8/.local/bin/scripts/fuzzel_run
+set $menu "$(/usr/bin/tofi-run)"
 
-set $browser-menu ~xdream8/.local/bin/scripts/browser-menu
-set $config-menu ~xdream8/.local/bin/scripts/config-menu
+set $browser-menu $HOME/.local/bin/scripts/browser-menu
+set $config-menu $HOME/.local/bin/scripts/config-menu
 
 exec /usr/bin/foot --server
 exec /usr/bin/wlsunset
@@ -68,12 +69,15 @@ input "type:pointer" {
 
     # Start your launcher
     bindsym $mod+p exec $menu
+
     ## menu scripts
     bindsym $mod+Shift+w exec $browser-menu
     bindsym $mod+Shift+e exec $config-menu
 
     bindsym $mod+$alt+r exec $term -T NNN -e nnn
     bindsym $mod+Shift+r exec $term -T HTOP -e htop
+
+    bindsym $mod+$alt+a exec $HOME/.local/bin/scripts/alsamixer-open
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -122,7 +126,7 @@ input "type:pointer" {
     bindsym $mod+4 workspace number 4
     bindsym $mod+5 workspace number 5
     bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
+    bindsym $mod+7 workspa"ce number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10

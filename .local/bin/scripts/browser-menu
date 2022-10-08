@@ -2,6 +2,8 @@
 
 launcher="${LAUNCHER:-fuzzel -dR}"
 
+# $1 is default command
+# $2 is command for wayland version if available
 open() {
 	if [ ! "$WAYLAND_DISPLAY" = "" ] && [ "$chroot" = "1" ]; then
 		setsid enter-chroot "$2" &
@@ -9,9 +11,12 @@ open() {
 		setsid "$1" &
 	elif [ "$chroot" = "1" ]; then
 		setsid enter-chroot "$2" &
-	else
+	elif [ ! "$chroot" = "1" ]; then
 		setsid "$1" &
+	else
+		return 1
 	fi
+	return 0
 }
 
 addopt() {
@@ -24,16 +29,18 @@ $1"
 }
 
 check() {
-	if [ "$(command -v "$1")" ]; then
-		addopt "$1"
+	app="$1"
+	if [ "$(command -v "$app")" ]; then
+		addopt "$app"
 	fi
-	if [ "$(enter-chroot sh -c "[ \"$(command -v "$1")\"   ] && echo 0 || echo 1")" = "1" ]; then
-		addopt "$1 - Chroot"
+	if [ "$(enter-chroot /bin/sh -c "[ \"$(command -v "$app" 2>/dev/null)\"  ] && echo 1")" ] || \
+		[ "$(enter-chroot /bin/sh -c "[ -f \"/usr/bin/$app\" ] && echo 1")" ]; then
+		addopt "$app - Chroot"
 	fi
 }
 
-for i in chromium firefox luakit vimb; do
-	check "$i"
+for browser in chromium firefox luakit vimb surf badwolf; do
+	check "$browser"
 done
 
 addopt "Quit"
@@ -43,6 +50,7 @@ choice=$(printf '%s\n' "$opts" | $launcher)
 case "$choice" in
 *Chroot*)
 	chroot="1"
+	choice="${choice% -*}"
 	;;
 *)
 	chroot="0"
@@ -59,13 +67,7 @@ case "$choice" in
 *chromium*)
 	open "chromium --enable-low-end-device-mode" "chromium --no-sandbox --enable-low-end-device-mode"
 	;;
-*luakit*)
-	open "luakit" "luakit"
-	;;
-*vimb*)
-	open "vimb" "vimb"
-	;;
 *)
-	exit 1
+	open "$choice" "$choice"
 	;;
 esac

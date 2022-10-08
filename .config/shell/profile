@@ -32,7 +32,8 @@ export EDITOR="vim"
 export TERMINAL="footclient"
 export BROWSER="vimb"
 export READER="mupdf"
-export LAUNCHER="fuzzel -dR"
+#export LAUNCHER="fuzzel -dR"
+export LAUNCHER="tofi"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"

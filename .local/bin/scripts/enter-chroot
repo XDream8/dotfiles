@@ -71,8 +71,11 @@ set_title() {
 # cp -r /run/dbus "$R"/run/
 
 # update alsa config
-rm -f "$R"/etc/asound.conf
-cp "${XDG_CONFIG_HOME:-$HOME/.config}"/alsa/asoundrc "$R"/etc/asound.conf
+if [ ! "$(sha256sum "${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc" | awk '{print $1}')" = \
+	"$(sha256sum "$R/etc/asound.conf" | awk '{print $1}')" ]; then
+	rm -f "$R/etc/asound.conf"
+	cp "${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc" "$R/etc/asound.conf"
+fi
 
 if [ -n "$1" ]; then
 	$linux32 "$CHROOT" "$R" /bin/env -i \
