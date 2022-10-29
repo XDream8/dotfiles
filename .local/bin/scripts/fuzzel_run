@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-launcher="${LAUNCHER:-fuzzel -dR}"
+launcher="fuzzel -dR"
 
 path="$(printf '%s' "$PATH" | tr ":" " ")"
 

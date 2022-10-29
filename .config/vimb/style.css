@@ -6,26 +6,26 @@ body::-webkit-scrollbar {
 
 /* dark mode */
 *,div,pre,textarea,body,input,td,tr,p {
-	    background-color: #1a1b26 !important;
+	    background-color: #15161e !important;
 		    background-image: none !important;
 			    color: #bbbbbb !important;
 
 }
 h1,h2,h3,h4 {
-	    background-color: #1a1b26 !important;
+	    background-color: #15161e !important;
 		    color: #b8ddea !important;
 
 }
 a {
-	    color: #70e070 !important;
+	    color: #9ece6a !important;
 
 }
 a:hover,a:focus {
-	    color: #7070e0 !important;
+	    color: #bb9af7 !important;
 
 }
 a:visited {
-	    color: #e07070 !important;
+	    color: #f7768e !important;
 
 }
 img {
@@ -38,15 +38,15 @@ img:hover {
 }
 
 /* Hint mode color styling
- *  * Color scheme: Base16 Eighties (https://github.com/chriskempson/base16)
+ *  * Color scheme: tokyo night
  *   *
  *    * The precedence of the user style is lower than that of the website so you
  *     * have to mark your style definition to have higher priority.
  *      */
 	span[vimbhint^='label'] {
 		    background-color: #f2f0ec !important;
-			    border: 1px solid #2d2d2d !important;
-				    color: #2d2d2d !important;
+			    border: 1px solid #1a1b26 !important;
+				    color: #1a1b26 !important;
 					    font: bold 10pt monospace !important;
 						    opacity: 1 !important;
 							    padding: .1em .4em !important;
@@ -59,11 +59,11 @@ img:hover {
 	}
 *[vimbhint^='hint'] {
 	    background-color: #ffcc66 !important;
-		    color: #2d2d2d !important;
+		    color: #1a1b26 !important;
 
 }
 *[vimbhint='hint focus'] {
 	    background-color: #6699cc !important;
-		    color: #2d2d2d !important;
+		    color: #1a1b26 !important;
 
 }

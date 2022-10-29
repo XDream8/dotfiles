@@ -4,12 +4,11 @@ source ~/.vim/plug-config/plugins.vim
 source ~/.vim/general/basic.vim
 
 " Keybindings
-"source confdir .. /keys/fzf.vim
-"source confdir .. /keys/goyo.vim
+source ~/.vim/keys/fzf.vim
+source ~/.vim/keys/goyo.vim
 source ~/.vim/keys/splits.vim
 source ~/.vim/keys/shell.vim
 
 " Plugin configs
-"source ~/.config/nvim/plug-config/coc.vim
-"source ~/.config/nvim/plug-config/netrw.vim
-"source ~/.config/nvim/plug-config/vimwiki.vim
+source ~/.vim/plug-config/lightline.vim
+source ~/.vim/plug-config/vimwiki.vim

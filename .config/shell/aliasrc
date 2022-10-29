@@ -9,18 +9,15 @@ alias \
 	mv='mv -iv' \
 	rm='rm -iv' \
 	mkd='mkdir -pv' \
-	yt='youtube-dl --add-metadata -i' \
-	yta='yt -x -f bestaudio/best' \
+	yt='yt-dlp --add-metadata -i' \
+	ytv='yt -f "bestvideo[height<=?720]+bestaudio/best"' \
+	yta='yt -x -f "bestaudio/best"' \
 	ffmpeg='ffmpeg -hide_banner'
 
 # Colorize commands when possible.
 alias \
 	ls='ls -h --group-directories-first --color=auto' \
 	ps_mem='doas ps_mem'
-	# grep='grep --color=auto' \
-	# diff='diff --color=auto' \
-	# ccat='highlight --out-format=ansi' \
-	# ip='ip -color=auto'
 
 # These common commands are just too long! Abbreviate them.
 alias \
@@ -35,4 +32,4 @@ alias \
 
 alias \
 	tmux='tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf' \
-	yarn='yarn --use-yarnrc '$XDG_CONFIG_HOME/yarn/config''
+	yarn='yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config'

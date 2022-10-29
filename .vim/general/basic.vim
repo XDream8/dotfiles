@@ -1,5 +1,4 @@
 colorscheme tokyonight
-set background=dark
 "Some basics:
 nnoremap c "_c
 set nocompatible
@@ -8,8 +7,6 @@ syntax on
 set smartcase
 set encoding=utf-8
 set number
-" use normal cliphoard not crazy primary bullshit
-set clipboard=unnamedplus
 " Tab Settings
 set shiftwidth=4
 set softtabstop=4
@@ -18,9 +15,6 @@ set tabstop=4
 set wildmode=longest,list,full
 " Fix splitting
 set splitbelow splitright
-" Cursor line
-" set cursorline
-" set cursorcolumn
 " mouse scrolling
 set mouse=a
 set go=a
@@ -52,8 +46,18 @@ set lazyredraw
 set updatetime=300
 set timeoutlen=500
 
+" Cursor shape
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" Wayland clipboard(waycopy)
+xnoremap "+y y:call system("waycopy", @")<cr>
+nnoremap "+p :let @"=substitute(system("waypaste"), '<C-v><C-m>', '', 'g')<cr>p
+nnoremap "*p :let @"=substitute(system("waypaste"), '<C-v><C-m>', '', 'g')<cr>p
+
 " Don't use Ex mode, use Q for formatting
 map Q gq
+
 " Save as root
 cnoremap w!! execute 'silent! write !doas tee % >/dev/null' <bar> edit!
 
@@ -78,9 +82,6 @@ autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
 " Run xrdb whenever Xdefaults or Xresources are updated.
 autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
 autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
-
-" Run source whenever init.vim is updated
-autocmd BufWritePost $MYVIMRC source %
 
 " Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
 if &diff

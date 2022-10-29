@@ -49,13 +49,13 @@ else
 	fi
 
 	# prevent from mounting twice
-	if [ ! -d "$R"/dev/pts ]; then
-		mount --bind /dev "$R"/dev
-		mount --bind /dev/pts "$R"/dev/pts
-		mount --bind /dev/shm "$R"/dev/shm
-		mount --bind /proc "$R"/proc
-		mount --bind /tmp "$R"/tmp
-		mount --bind /home/xdream8 "$R"/root
+	if [ ! -d "$R/dev/pts" ]; then
+		mount --bind /dev "$R/dev"
+		mount --bind /dev/pts "$R/dev/pts"
+		mount --bind /dev/shm "$R/dev/shm"
+		mount --bind /proc "$R/proc"
+		mount --bind /tmp "$R/tmp"
+		mount --bind /home/xdream8 "$R/root"
 	fi
 
 	CHROOT=chroot
@@ -72,14 +72,14 @@ set_title() {
 # cp -r /run/dbus "$R"/run/
 
 # update alsa config
-if [ ! "$(sha256sum "${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc" | awk '{print $1}')" = \
+if [ ! -f "$R/etc/asound.conf" ] || [ ! "$(sha256sum "${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc" | awk '{print $1}')" = \
 	"$(sha256sum "$R/etc/asound.conf" | awk '{print $1}')" ]; then
 	rm -f "$R/etc/asound.conf"
 	cp "${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc" "$R/etc/asound.conf"
 fi
 
 if [ -n "$1" ]; then
-	$linux32 "$CHROOT" "$R" /bin/env -i \
+	$linux32 "$CHROOT" "$R" "$env_bin" -i \
 		HOME=/root PATH="/local/bin:/bin" TERM="$TERM" PS1='\u:\w$ ' WAYLAND_DISPLAY="$WAYLAND_DISPLAY" XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir" \
 		"$@"
 	ret=$?
@@ -88,7 +88,7 @@ else
 
 	echo "Entering chroot..."
 
-	$linux32 "$CHROOT" "$R" /bin/env -i \
+	$linux32 "$CHROOT" "$R" "$env_bin" -i \
 		HOME=/root TERM="$TERM" PS1='\u:\w$ ' WAYLAND_DISPLAY="$WAYLAND_DISPLAY" XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir" \
 		/bin/bash --login
 	ret=$?
@@ -109,13 +109,13 @@ tryumount() {
 	fi
 }
 
-if [ "$CHROOT" = "chroot" ] && [ -d "$R"/dev/pts ]; then
-	tryumount "$R"/dev/pts
-	tryumount "$R"/dev/shm
-	tryumount "$R"/dev
-	tryumount "$R"/proc
-	tryumount "$R"/tmp
-	tryumount "$R"/root
+if [ "$CHROOT" = "chroot" ] && [ -d "$R/dev/pts" ]; then
+	tryumount "$R/dev/pts"
+	tryumount "$R/dev/shm"
+	tryumount "$R/dev"
+	tryumount "$R/proc"
+	tryumount "$R/tmp"
+	tryumount "$R/root"
 fi
 
 cd "$H" || ret=1

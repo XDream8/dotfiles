@@ -19,8 +19,8 @@ set $term /usr/bin/footclient
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-# set $menu ~xdream8/.local/bin/scripts/fuzzel_run
-set $menu "$(/usr/bin/tofi-run)"
+set $menu $HOME/.local/bin/scripts/fuzzel_run
+# set $menu "$(/usr/bin/tofi-run)"
 
 set $browser-menu $HOME/.local/bin/scripts/browser-menu
 set $config-menu $HOME/.local/bin/scripts/config-menu
@@ -38,7 +38,7 @@ default_border pixel
 ### Output configuration
 #
 # Default wallpaper
-exec /usr/bin/wbg ~xdream8/Defaults/Pictures/wallpapersden.com_macos-12-monterey-stock-dark_1280x720.jpg
+exec /usr/bin/wbg $HOME/defaults/Pictures/wallpapersden.com_macos-12-monterey-stock-dark_1280x720.jpg
 #
 # resolution
 output LVDS-1 resolution 1366x768 position 0,0
