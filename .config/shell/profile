@@ -1,23 +1,31 @@
 #!/bin/yash
 
-# zsh profile file. Runs on login. Environmental variables are set here.
-
-export PATH="/usr/lib/ccache/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/.yarn/bin:$PATH"
+export PATH="/usr/lib/ccache/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH"
 
 ## kiss related
 export CFLAGS="-O3 -march=native"
 export CXXFLAGS="$CFLAGS"
-# export MAKEFLAGS="-j2"
+export MAKEFLAGS="-j2"
+
+export KISS_HOOK="\
+/usr/lib/kiss-hooks/kiss-timer-hook:\
+/usr/lib/kiss-hooks/kiss-mangz-hook:\
+/usr/lib/kiss-hooks/kiss-rminfo-hook"
 
 export KISS_GET="aria2c"
 export KISS_COMPRESS="zst"
 
 export KISS_PATH="\
-/home/xdream8/.local/repos/local:\
-/home/xdream8/.local/repos/bin/bin:\
+/home/xdream8/.local/repos/local/bin:\
+/home/xdream8/.local/repos/local/extra:\
+/home/xdream8/.local/repos/local/wayland:\
+/home/xdream8/.local/repos/local/xorg-apps:\
 /home/xdream8/.local/repos/repo/core:\
 /home/xdream8/.local/repos/repo/extra:\
 /home/xdream8/.local/repos/repo/wayland:\
+/home/xdream8/.local/repos/ehawkvu-repo/kernel:\
+/home/xdream8/.local/repos/ehawkvu-repo/server:\
+/home/xdream8/.local/repos/ehawkvu-repo/utils:\
 /home/xdream8/.local/repos/community/community"
 
 ## xdg_runtime_dir
@@ -30,12 +38,11 @@ if [ -z "${XDG_RUNTIME_DIR}" ]; then
 fi
 
 # Default programs:
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERMINAL="footclient"
 export BROWSER="vimb"
 export READER="mupdf"
 export LAUNCHER="fuzzel -dR"
-#export LAUNCHER="tofi"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -88,13 +95,13 @@ export DICS="/usr/share/stardict/dic/"
 export SUDO_ASKPASS="$HOME/.local/bin/scripts/dmenupass"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 export LESS=-R
-export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
-export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
-export LESS_TERMCAP_me="$(printf '%b' '[0m')"
-export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
-export LESS_TERMCAP_se="$(printf '%b' '[0m')"
-export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+# export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
+# export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
+# export LESS_TERMCAP_me="$(printf '%b' '[0m')"
+# export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
+# export LESS_TERMCAP_se="$(printf '%b' '[0m')"
+# export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
+# export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 # export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
@@ -103,7 +110,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
-export WLR_NO_HARDWARE_CURSORS=1
+# export WLR_NO_HARDWARE_CURSORS=1
 
 # ksh
 # export ENV="$XDG_CONFIG_HOME/shell/kshrc"
@@ -192,4 +199,8 @@ ex=🎯:\
 *.java=♨:\
 "
 
+# added by Nix installer
+if [ -e /home/xdream8/.nix-profile/etc/profile.d/nix.sh ]; then . /home/xdream8/.nix-profile/etc/profile.d/nix.sh; fi
+
+## start sway
 [ "$(tty)" = "/dev/tty1" ] && ! pidof -s sway >/dev/null 2>&1 && exec sway

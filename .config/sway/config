@@ -19,7 +19,7 @@ set $term /usr/bin/footclient
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu $HOME/.local/bin/scripts/fuzzel_run
+set $menu /usr/bin/sh /home/xdream8/.local/bin/scripts/fuzzel_run
 # set $menu "$(/usr/bin/tofi-run)"
 
 set $browser-menu $HOME/.local/bin/scripts/browser-menu
@@ -27,9 +27,11 @@ set $config-menu $HOME/.local/bin/scripts/config-menu
 
 exec /usr/bin/foot --server
 exec /usr/bin/wlsunset
+# exec /usr/bin/syncthing
 
-set $gap 10
+set $gap 8
 gaps inner $gap
+gaps outer $gap
 
 font FiraCode Nerd Font 11
 
@@ -126,7 +128,7 @@ input "type:pointer" {
     bindsym $mod+4 workspace number 4
     bindsym $mod+5 workspace number 5
     bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspa"ce number 7
+    bindsym $mod+7 workspace number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
