@@ -2,24 +2,29 @@
 
 export PATH="/usr/lib/ccache/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH"
 
-## kiss related
-export CFLAGS="-O3 -march=native"
+## build
+export CFLAGS="-O2 -march=native"
 export CXXFLAGS="$CFLAGS"
-export MAKEFLAGS="-j2"
+export MAKEFLAGS="-j3"
 
+export SAMUFLAGS="$MAKEFLAGS"
+export CMAKE_GENERATOR="Ninja"
+
+## kiss related
 export KISS_HOOK="\
 /usr/lib/kiss-hooks/kiss-timer-hook:\
 /usr/lib/kiss-hooks/kiss-mangz-hook:\
 /usr/lib/kiss-hooks/kiss-rminfo-hook"
 
-export KISS_GET="aria2c"
-export KISS_COMPRESS="zst"
+export KISS_GET="axel"
+export KISS_COMPRESS="bz2"
 
 export KISS_PATH="\
 /home/xdream8/.local/repos/local/bin:\
 /home/xdream8/.local/repos/local/extra:\
 /home/xdream8/.local/repos/local/wayland:\
 /home/xdream8/.local/repos/local/xorg-apps:\
+/home/xdream8/.local/repos/local/testing:\
 /home/xdream8/.local/repos/repo/core:\
 /home/xdream8/.local/repos/repo/extra:\
 /home/xdream8/.local/repos/repo/wayland:\

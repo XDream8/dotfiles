@@ -1,7 +1,7 @@
-#!/bin/yash
 ##### Sample Yashrc #####
 # This is a sample initialization script for yash. Copy this file to ~/.yashrc
 # and add your favorite customization to it.
+
 
 # Firstly, load the common customization script.
 # If you don't like settings applied in this script, remove this line.
@@ -29,34 +29,12 @@
 #_update_direnv
 #YASH_AFTER_CD=("$YASH_AFTER_CD" '_update_direnv')
 
-# And add your own customization below.
-
 alias source="."
-
-# History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
-
-set -o vi
-
-stty stop undef
-
-# Load aliases and shortcuts if exists.
+                         
+# Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
 
-# Use lf to switch directories and bind it to ctrl-o
-lfcd() {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp" >/dev/null
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir" || return
-    fi
-
-}
-
-# beam cursor
+# cursor
 # echo -ne '\e[5 q'
 
 # vim: set et sw=2 sts=2 tw=78 ft=sh:

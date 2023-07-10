@@ -17,30 +17,38 @@ set $right l
 # Your preferred terminal emulator
 set $term /usr/bin/footclient
 # Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
 set $menu /usr/bin/sh /home/xdream8/.local/bin/scripts/fuzzel_run
 # set $menu "$(/usr/bin/tofi-run)"
 
 set $browser-menu $HOME/.local/bin/scripts/browser-menu
 set $config-menu $HOME/.local/bin/scripts/config-menu
 
+## autostart
 exec /usr/bin/foot --server
 exec /usr/bin/wlsunset
+exec /usr/bin/emacs --daemon
 # exec /usr/bin/syncthing
 
+# set gaps
 set $gap 8
 gaps inner $gap
 gaps outer $gap
 
+# set font
 font FiraCode Nerd Font 11
 
+# hide titlebar
 default_border pixel
+
+# no gaps when there is only one window
+smart_gaps on
+# no borders when there is only one window
+smart_borders on
 
 ### Output configuration
 #
 # Default wallpaper
-exec /usr/bin/wbg $HOME/defaults/Pictures/wallpapersden.com_macos-12-monterey-stock-dark_1280x720.jpg
+exec /usr/bin/wbg $HOME/defaults/Pictures/wallhaven-ex9gwo_1280x720.png
 #
 # resolution
 output LVDS-1 resolution 1366x768 position 0,0

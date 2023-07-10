@@ -3,33 +3,46 @@
 # Use neovim for vim if present.
 # [ -x '$(command -v nvim)' ] && alias vim='nvim' vimdiff="nvim -d"
 
+## ls alternatives
+if command -v exa >/dev/null; then
+    alias ls='exa -h --group-directories-first --color=auto --icons'
+elif command -v lsd >/dev/null; then
+    alias ls='lsd -h --group-directories-first --color=auto'
+else
+    alias ls='ls -h --group-directories-first --color=auto'
+fi
+
+if command -v bat >/dev/null;then
+    alias cat='bat'
+fi
+
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
-	cp='cp -iv' \
-	mv='mv -iv' \
-	rm='rm -iv' \
-	mkd='mkdir -pv' \
-	yt='yt-dlp --add-metadata -i' \
-	ytv='yt -f "bestvideo[height<=?720]+bestaudio/best"' \
-	yta='yt -x -f "bestaudio/best"' \
-	ffmpeg='ffmpeg -hide_banner'
+    cp='cp -iv' \
+    mv='mv -iv' \
+    rm='rm -iv' \
+    mkd='mkdir -pv' \
+    yt='yt-dlp --add-metadata -i' \
+    ytv='yt -f "bestvideo[height<=?720]+bestaudio/best"' \
+    yta='yt -x -f "bestaudio/best"' \
+    ffmpeg='ffmpeg -hide_banner'
 
-# Colorize commands when possible.
+# use doas when needed
 alias \
-	ls='ls -h --group-directories-first --color=auto' \
-	ps_mem='doas ps_mem'
+    ps_mem='doas ps_mem'
 
 # These common commands are just too long! Abbreviate them.
 alias \
-	ka='killall' \
-	g='git' \
-	f='$FILE' \
-	e='$EDITOR' \
-	v='$EDITOR' \
-	blueup='doas rfkill unblock bluetooth && doas rc-service bluetooth start && doas rc-service bluealsa start' \
-	bluedown='doas rfkill block bluetooth && doas rc-service bluetooth stop && doas rc-service bluealsa stop' \
-	dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+    ka='killall' \
+    g='git' \
+    f='$FILE' \
+    e='$EDITOR' \
+    v='$EDITOR' \
+    blueup='doas rfkill unblock bluetooth && doas rc-service bluetooth start && doas rc-service bluealsa start' \
+    bluedown='doas rfkill block bluetooth && doas rc-service bluetooth stop && doas rc-service bluealsa stop' \
+    dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+# respect $XDG_CONFIG_HOME
 alias \
-	tmux='tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf' \
-	yarn='yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config'
+    tmux='tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf' \
+    yarn='yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config'
