@@ -100,7 +100,7 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq scroll-step 8) ;; keyboard scroll 8 line at a time
 
 ;; Don't warn for large files
 (setq large-file-warning-threshold nil)
@@ -109,12 +109,16 @@
   :defer t)
 
 ;; icons
-(use-package nerd-icons
-  :defer t)
+(use-package nerd-icons)
 
-;; The Doom Emacs themes look really good.
+;; The Doom Emacs themes
 (use-package doom-themes
+  ;; only get doom-dracula theme - speed up
+  :elpaca (:files (:defaults "doom-themes.*" "themes/doom-dracula-theme.el"))
   :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t)
+  (setq doom-themes-enable-italic t)
   (load-theme 'doom-dracula t))
 
 (use-package simple-modeline
@@ -143,6 +147,7 @@
 
 (use-package welcome-dashboard
   :elpaca (:host github :repo "konrad1977/welcome-dashboard")
+  :after nerd-icons
   :config
   ;; Use nerd icons instead of all-the-icons
   (setq welcome-dashboard-use-nerd-icons t)
@@ -445,6 +450,11 @@
   (rustic-lsp-client 'eglot)
   (rustic-format-on-save t))
 
+;; Lua
+(use-package lua-mode
+  :defer t
+  :mode "\\.lua\\’")
+
 ;; Folding
 (use-package origami
   :hook (yaml-mode . origami-mode))
@@ -461,9 +471,13 @@
   (add-hook 'prog-mode-hook 'flycheck-mode))
 
 (use-package yasnippet
-  :hook (prog-mode . yas-minor-mode)
+  ;; :hook (prog-mode . yas-minor-mode)
   :config
-  (yas-reload-all))
+  (yas-global-mode))
+
+(use-package yasnippet-snippets
+  :defer t
+  :after yasnippet)
 
 ;; Begin improvements
 
@@ -484,9 +498,9 @@
 ;;; ORG Mode
 
 (use-package org-modern
-  :after org
-  :config
-  (add-hook 'org-mode 'org-modern-mode))
+  :init
+  (add-hook 'org-mode-hook #'org-modern-mode)
+  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
 
 ;; table of contents
 (use-package toc-org
@@ -536,6 +550,22 @@
   (require 'emms-setup)
   (emms-standard)
   (emms-default-players))
+
+;; keepass
+(use-package keepass-mode
+  :defer 5
+  :mode "\\.kbdx\\'")
+
+;; youtube frontend
+(use-package empv
+  :elpaca (:host github :repo "isamert/empv.el")
+  :custom
+  (empv-invidious-instance "https://vid.puffyan.us/api/v1")
+  (empv-youtube-use-tabulated-results t))
+
+;; 0x0.st integration
+(use-package 0x0
+  :defer t)
 
 ;; pacman - 󰮯
 (use-package pacmacs

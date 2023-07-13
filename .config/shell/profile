@@ -3,7 +3,7 @@
 export PATH="/usr/lib/ccache/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH"
 
 ## build
-export CFLAGS="-O2 -march=native"
+export CFLAGS="-O3 -march=native"
 export CXXFLAGS="$CFLAGS"
 export MAKEFLAGS="-j3"
 
@@ -43,9 +43,9 @@ if [ -z "${XDG_RUNTIME_DIR}" ]; then
 fi
 
 # Default programs:
-export EDITOR="nvim"
+export EDITOR="emacs"
 export TERMINAL="footclient"
-export BROWSER="vimb"
+export BROWSER="brave"
 export READER="mupdf"
 export LAUNCHER="fuzzel -dR"
 
@@ -100,13 +100,13 @@ export DICS="/usr/share/stardict/dic/"
 export SUDO_ASKPASS="$HOME/.local/bin/scripts/dmenupass"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 export LESS=-R
-# export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
-# export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
-# export LESS_TERMCAP_me="$(printf '%b' '[0m')"
-# export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
-# export LESS_TERMCAP_se="$(printf '%b' '[0m')"
-# export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-# export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
+export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
+export LESS_TERMCAP_me="$(printf '%b' '[0m')"
+export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
+export LESS_TERMCAP_se="$(printf '%b' '[0m')"
+export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
+export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 # export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.

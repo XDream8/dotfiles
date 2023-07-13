@@ -27,7 +27,7 @@ set $config-menu $HOME/.local/bin/scripts/config-menu
 exec /usr/bin/foot --server
 exec /usr/bin/wlsunset
 exec /usr/bin/emacs --daemon
-# exec /usr/bin/syncthing
+exec /usr/bin/syncthing serve --no-browser
 
 # set gaps
 set $gap 8

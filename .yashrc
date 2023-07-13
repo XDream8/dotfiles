@@ -1,7 +1,4 @@
-##### Sample Yashrc #####
-# This is a sample initialization script for yash. Copy this file to ~/.yashrc
-# and add your favorite customization to it.
-
+#!/bin/yash
 
 # Firstly, load the common customization script.
 # If you don't like settings applied in this script, remove this line.
@@ -36,5 +33,8 @@ alias source="."
 
 # cursor
 # echo -ne '\e[5 q'
+
+## vi
+set -o vi
 
 # vim: set et sw=2 sts=2 tw=78 ft=sh:
